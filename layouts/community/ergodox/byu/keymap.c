@@ -7,6 +7,9 @@
 #define SYMB 1 // symbols
 #define MDIA 2 // media keys
 #define MOVE 3 // movement layer
+  
+#define TABPREV LSFT(LGUI(KC_LBRC))
+#define TABNEXT LSFT(LGUI(KC_RBRC))
 
 enum custom_keycodes {
   PLACEHOLDER = SAFE_RANGE, // can always be here
@@ -57,9 +60,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_ESC,        KC_A,         KC_S,   KC_D,   LT(MOVE, KC_F),KC_G,
         KC_LSPO,       KC_Z,         KC_X,   KC_C,   KC_V,          KC_B,   TG(SYMB),
         KC_LCTL,       KC_LALT,      KC_LGUI,BL_STEP,MO(MDIA),
-                                                                            LSFT(LGUI(KC_LBRC)),LSFT(LGUI(KC_RBRC)),
-                                                                                                KC_HOME,
-                                                                    KC_BSPC,GUI_T(KC_DEL),      KC_END,
+                                                                            TABPREB,      TABNEXT,
+                                                                                          KC_HOME,
+                                                                    KC_BSPC,GUI_T(KC_DEL),KC_END,
         // right hand
              KC_6,          KC_7,          KC_8,   KC_9,   KC_0,   KC_MINS,        KC_EQL,
              MEH_T(KC_RBRC),KC_Y,          KC_U,   KC_I,   KC_O,   KC_P,           KC_BSLS,
