@@ -64,7 +64,7 @@ static keyframe_animation_t color_animation = {
 void initialize_user_visualizer(visualizer_state_t* state) {
     // The brightness will be dynamically adjustable in the future
     // But for now, change it here.
-    lcd_backlight_brightness(130);
+    lcd_backlight_brightness(200);
     state->current_lcd_color = initial_color;
     state->target_lcd_color = logo_background_color;
     initial_update = true;

@@ -18,18 +18,10 @@ enum custom_macros {
   VERSION,
   EEPROM,
 
-  LSFT_TAB,
-  // MacOS macros
-  OSX_COPY,
-  OSX_PASTE,
-  TMUX_VSPLIT,
-  TMUX_HSPLIT,
-  OSX_INVERT,
+  TMUX_SUFFIX,
+  TMUX_CMD,
   OSX_PS_ALL,
   OSX_PS_APP,
-
-  //1Password 
-  ONEPASS_OPEN,
 };
 
 // NOTE: Cells marked with ACCESS must remain transparent, they're the keys that actually get to that layer
@@ -41,15 +33,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |   `    |   1  |   2  |   3  |   4  |   5  | MUTE |           |   6  |   7  |   8  |   9  |   0  |   -  |   =    |
  * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
  * | TAB    |   Q  |   W  |   E  |   R  |   T  |  [   |           |   ]  |   Y  |   U  |   I  |   O  |   P  |   \    |
- * |--------+------+------+------+------+------| Hyper|           | Hyper|------+------+------+------+------+--------|
+ * |--------+------+------+------+------+------|Hyper |           | Meh  |------+------+------+------+------+--------|
  * | Esc    |   A  |   S  |   D  |LT 3,F|   G  |------|           |------|   H  |   J  |   K  |   L  |   ;  |   '    |
- * |--------+------+------+------+------+------|  L2  |           |  L2  |------+------+------+------+------+--------|
- * | LShift |Z/Ctrl|   X  |   C  |   V  |   B  |      |           |      |   N  |   M  |   ,  |   .  |//Ctrl| RShift |
+ * |--------+------+------+------+------+------|  L1  |           |  L2  |------+------+------+------+------+--------|
+ * | LShift |   Z  |   X  |   C  |   V  |   B  |      |           |      |   N  |   M  |   ,  |   .  |   /  | RShift |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
- *   |LCTRL | LAFT | LGUI | LGUI |  L1  |                                       | Left | Down |  Up  | Right|  L1  |
+ *   |LCTRL | LAFT | LGUI | LED  | L2   |                                       | Left | Down |  Up  | Right|  L1  |
  *   `----------------------------------'                                       `----------------------------------'
  *                                        ,-------------.       ,-------------.
- *                                        | Copy | Paste|       |Vsplit|Hsplit|
+ *                                        | TabP | TabN |       | Tmux | Tmux:|
  *                                 ,------|------|------|       |------+--------+------.
  *                                 |      |      | Home |       | PgUp |        |      |
  *                                 | Bcksp| Del/ |------|       |------|  Ent   |Space |
@@ -63,20 +55,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_GRV,        KC_1,         KC_2,   KC_3,   KC_4,          KC_5,   KC_MUTE,
         KC_TAB,        KC_Q,         KC_W,   KC_E,   KC_R,          KC_T,   ALL_T(KC_LBRC),
         KC_ESC,        KC_A,         KC_S,   KC_D,   LT(MOVE, KC_F),KC_G,
-        KC_LSPO,       CTL_T(KC_Z),  KC_X,   KC_C,   KC_V,          KC_B,   TG(MDIA),
-        OSM(MOD_LCTL), KC_LALT,      KC_LGUI,KC_LGUI,TG(SYMB),
-                                                                            OSX_COPY,     OSX_PASTE,
-                                                                                          KC_HOME,
-                                                                    KC_BSPC,GUI_T(KC_DEL),KC_END,
+        KC_LSPO,       KC_Z,         KC_X,   KC_C,   KC_V,          KC_B,   TG(SYMB),
+        KC_LCTL,       KC_LALT,      KC_LGUI,BL_STEP,MO(MDIA),
+                                                                            LSFT(LGUI(KC_LBRC)),LSFT(LGUI(KC_RBRC)),
+                                                                                                KC_HOME,
+                                                                    KC_BSPC,GUI_T(KC_DEL),      KC_END,
         // right hand
-             KC_6,          KC_7,   KC_8,   KC_9,   KC_0,   KC_MINS,        KC_EQL,
-             ALL_T(KC_RBRC),KC_Y,   KC_U,   KC_I,   KC_O,   KC_P,           KC_BSLS,
-                            KC_H,   KC_J,   KC_K,   KC_L,   KC_SCLN,        KC_QUOT,
-             MO(MDIA),      KC_N,   KC_M,   KC_COMM,KC_DOT, CTL_T(KC_SLSH), KC_RSPC,
-                                    KC_LEFT,KC_DOWN,KC_UP,  KC_RIGHT,       MO(SYMB),
-             TMUX_VSPLIT,TMUX_HSPLIT,
+             KC_6,          KC_7,          KC_8,   KC_9,   KC_0,   KC_MINS,        KC_EQL,
+             MEH_T(KC_RBRC),KC_Y,          KC_U,   KC_I,   KC_O,   KC_P,           KC_BSLS,
+                            KC_H,          KC_J,   KC_K,   KC_L,   KC_SCLN,        KC_QUOT,
+             TG(MDIA),      KC_N,          KC_M,   KC_COMM,KC_DOT, KC_SLSH,        KC_RSPC,
+                                           KC_LEFT,KC_DOWN,KC_UP,  KC_RIGHT,       MO(SYMB),
+             M(TMUX_SUFFIX),M(TMUX_CMD),
              KC_PGUP,
-             KC_PGDN,    KC_ENT, KC_SPC
+             KC_PGDN,       KC_ENT, KC_SPC
     ),
 /* Keymap 1: Symbol Layer
  *
@@ -108,8 +100,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        KC_TRNS,KC_PERC,KC_CIRC,KC_LBRC,KC_RBRC,KC_TILD,KC_TRNS,
           EPRM,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,
                                        KC_TRNS,KC_CAPS,
-                                               OSX_PS_APP,
-                               KC_TRNS,KC_TRNS,OSX_PS_ALL,
+                                               M(OSX_PS_APP),
+                               KC_TRNS,KC_TRNS,M(OSX_PS_ALL),
        // right hand
        KC_F6,   KC_F7,  KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,
        KC_TRNS, KC_UP,   KC_7,   KC_8,    KC_9,    KC_ASTR, KC_TRNS,
@@ -123,7 +115,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 3: Media and mouse keys
  *
  * ,--------------------------------------------------.           ,--------------------------------------------------.
- * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
+ * |        |      |      |      |      |      |      |           |      |      |      |      |      | Vol- |  Vol+  |
  * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
  * |        |      |      | MsUp |      |      |      |           |      |      |      |      |      |      |        |
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
@@ -134,11 +126,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *   |      |      |      | Lclk | Rclk |                                       | Prev |      |      | Next |      |
  *   `----------------------------------'                                       `----------------------------------'
  *                                        ,-------------.       ,-------------.
- *                                        | Back+| Back-|       |      |      |
+ *                                        |      |      |       |      |      |
  *                                 ,------|------|------|       |------+------+------.
- *                                 |      |      |BackTg|       | Vol+ |      |      |
+ *                                 |      |      |BackTg|       |      |      |      |
  *                                 |      |      |------|       |------|      | Pl/Ps|
- *                                 |      |      |      |       | Vol- |      |      |
+ *                                 |      |      |      |       |      |      |      |
  *                                 `--------------------'       `--------------------'
  */
 // MEDIA AND MOUSE
@@ -148,31 +140,31 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        KC_TRNS, KC_TRNS, KC_MS_L, KC_MS_D, KC_MS_R, KC_TRNS,
        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
        KC_TRNS, KC_TRNS, KC_TRNS, KC_BTN1, KC_BTN2,
-                                           BL_INC,  BL_DEC,
+                                           KC_TRNS, KC_TRNS,
                                                     BL_TOGG,
                                   KC_TRNS, KC_TRNS, KC_TRNS,
     // right hand
-       KC_TRNS,  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+       KC_TRNS,  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_VOLU, KC_VOLD,
        KC_TRNS,  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
                  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
        KC_TRNS,  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
                           KC_MRWD, KC_TRNS, KC_TRNS, KC_MFFD, KC_TRNS,
        KC_TRNS, KC_TRNS,
-       KC_VOLU,
-       KC_VOLD, KC_TRNS, KC_MPLY
+       KC_TRNS,
+       KC_TRNS, KC_TRNS, KC_MPLY
 ),
 /* Keymap 4: Movement
  *
  * ,--------------------------------------------------.           ,--------------------------------------------------.
  * |  RESET |      |      |      |      |      |      |           |      |      |      |      |      |      | RESET  |
  * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
- * |        |      |      |      |      |      |      |           |      | Copy |      |      |      | Paste|        |
+ * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * |        |DLeft |DRight|      |      |      |------|           |------| Left | Down |  Up  | Right|      |        |
+ * |        |      |      |      |      |      |------|           |------| Left | Down |  Up  | Right|      |        |
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * |        |SFT_TB| TAB  |      |      |      |      |           |      |      |      |      |      |      |        |
+ * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
- *   |      |      |      |      |      |                                       |      |      |      |      |      |
+ *   |      |      |POWER | WAKE |SLEEP |                                       |      |      |      |      |      |
  *   `----------------------------------'                                       `----------------------------------'
  *                                        ,-------------.       ,-------------.
  *                                        |      |      |       |      |      |
@@ -186,15 +178,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [MOVE] = LAYOUT_ergodox(
        RESET,   KC_TRNS,        KC_TRNS,        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
        KC_TRNS, KC_TRNS,        KC_TRNS,        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-       KC_TRNS, LCTL(KC_LEFT),  LCTL(KC_RIGHT), KC_TRNS, KC_TRNS, KC_TRNS,
-       KC_TRNS, M(LSFT_TAB),    KC_TAB,         KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-       KC_TRNS, KC_TRNS,        KC_TRNS,        KC_TRNS, KC_TRNS, 
+       KC_TRNS, KC_TRNS,        KC_TRNS,        KC_TRNS, KC_TRNS, KC_TRNS,
+       KC_TRNS, KC_TRNS,        KC_TRNS,        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+       KC_TRNS, KC_TRNS,        KC_WAKE,        KC_SLEP, KC_TRNS, 
                                              KC_TRNS, KC_TRNS,
                                                       KC_TRNS,
                                     KC_TRNS, KC_TRNS, KC_TRNS,
     // right hand
        KC_TRNS,  KC_TRNS,   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,   RESET,
-       KC_TRNS,  OSX_COPY,  KC_TRNS, KC_TRNS, KC_TRNS, OSX_PASTE, KC_TRNS,
+       KC_TRNS,  KC_TRNS,   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,   KC_TRNS,
                  KC_LEFT,   KC_DOWN, KC_UP,   KC_RIGHT,KC_TRNS,   KC_TRNS,
        KC_TRNS,  KC_TRNS,   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,   KC_TRNS,
                             KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,   KC_TRNS,
@@ -222,49 +214,24 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
             eeconfig_init();
           }
           break;
-        case OSX_COPY:
+        case TMUX_SUFFIX:
           if (record->event.pressed) {
-            return MACRO(D(LGUI), T(C), U(LGUI), END);
+            return MACRO(D(LCTRL), T(B), U(LCTL), END);
           }
           break;
-        case OSX_PASTE:
+        case TMUX_CMD:
           if (record->event.pressed) {
-            return MACRO(D(LGUI), T(P), U(LGUI), END);
+            return MACRO(D(LCTRL), T(B), U(LCTL), D(LSFT), T(SCOLON), U(LCTRL), U(LSFT), END);
           }
           break;
         case OSX_PS_ALL:
           if (record->event.pressed) {
-            return MACRO(D(LGUI), D(LSFT), T(3), U(LSFT), U(LGUI), END);
+            return MACRO(D(LSFT), D(LGUI), T(3), U(LGUI), U(LSFT), END);
           }
           break;
         case OSX_PS_APP:
           if (record->event.pressed) {
-            return MACRO(D(LGUI), D(LSFT), T(4), U(LSFT), U(LGUI), END);
-          }
-          break;
-        case OSX_INVERT:
-          if (record->event.pressed) {
-            return MACRO(D(LGUI), D(LALT), D(LCTL), T(8), U(LGUI), U(LALT), U(LCTL), END);
-          }
-          break;
-        case TMUX_VSPLIT:
-          if (record->event.pressed) {
-            return MACRO(D(LCTRL), T(B), U(LCTL), D(LSFT), T(5), U(LSFT), END);
-          }
-          break;
-        case TMUX_HSPLIT:
-          if (record->event.pressed) {
-            return MACRO(D(LCTRL), T(B), U(LCTL), D(LSFT), T(QUOT), U(LSFT), END);
-          }
-          break;
-        case LSFT_TAB:
-          if (record->event.pressed) {
-            return MACRO(D(LSFT), T(TAB), U(LSFT), END);
-          }
-          break;
-        case ONEPASS_OPEN:
-          if (record->event.pressed) { // 1Password open application
-            return MACRO(D(LGUI), T(BSLS), U(LCTL), END);
+            return MACRO(D(LSFT), D(LGUI), T(4), U(LGUI), U(LSFT), END);
           }
           break;
       }
