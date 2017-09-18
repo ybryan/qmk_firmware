@@ -59,7 +59,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,        KC_Q,          KC_W,   KC_E,             KC_R,          KC_T,   ALL_T(KC_LBRC),
         KC_ESC,        LT(MOVE, KC_A),KC_S,   KC_D,             KC_F,          KC_G,
         KC_LSPO,       KC_Z,          KC_X,   KC_C,             KC_V,          KC_B,   TT(SYMB),
-        KC_LCTL,       KC_LALT,       KC_LGUI,BL_STEP, LT(MOUS, KC_MUTE),
+        KC_LCTL,       KC_LALT,       KC_LGUI,BL_STEP, LT(SYMB, KC_MUTE),
                                                                   KC_VOLD,      KC_VOLU,
                                                                                 KC_HOME,
                                                       KC_BSPC,    GUI_T(KC_DEL),KC_END,
