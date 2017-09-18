@@ -10,6 +10,8 @@
   
 #define TABPREV LSFT(LGUI(KC_LBRC))
 #define TABNEXT LSFT(LGUI(KC_RBRC))
+#define PREVSC LCTL(KC_LEFT)
+#define NEXTSC LCTL(KC_RIGHT)
 
 enum custom_keycodes {
   PLACEHOLDER = SAFE_RANGE, // can always be here
@@ -33,45 +35,45 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Basic layer
  *
  * ,--------------------------------------------------.           ,--------------------------------------------------.
- * |   `    |   1  |   2  |   3  |   4  |   5  | MUTE |           |   6  |   7  |   8  |   9  |   0  |   -  |   =    |
+ * |   `    |   1  |   2  |   3  |   4  |   5  |  -   |           |   =  |   6  |   7  |   8  |   9  |   0  |  CAPS  |
  * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
  * | TAB    |   Q  |   W  |   E  |   R  |   T  |  [   |           |   ]  |   Y  |   U  |   I  |   O  |   P  |   \    |
  * |--------+------+------+------+------+------|Hyper |           | Meh  |------+------+------+------+------+--------|
- * | Esc    |   A  |   S  |   D  |LT 3,F|   G  |------|           |------|   H  |   J  |   K  |   L  |   ;  |   '    |
+ * | Esc    |LT 3,A|   S  |   D  |   F  |   G  |------|           |------|   H  |   J  |   K  |   L  |LT 3,;|   '    |
  * |--------+------+------+------+------+------|  L1  |           |  L2  |------+------+------+------+------+--------|
  * | LShift |   Z  |   X  |   C  |   V  |   B  |      |           |      |   N  |   M  |   ,  |   .  |   /  | RShift |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
- *   |LCTRL | LAFT | LGUI | LED  | L2   |                                       | Left | Down |  Up  | Right|  L1  |
+ *   |LCTRL | LAFT | LGUI | LED  | MUTE |                                       | Left | Down |  Up  | Right|  L2  |
  *   `----------------------------------'                                       `----------------------------------'
  *                                        ,-------------.       ,-------------.
- *                                        | TabP | TabN |       | Tmux | Tmux:|
+ *                                        | VolD | VolU |       | TabP | TabN |
  *                                 ,------|------|------|       |------+--------+------.
  *                                 |      |      | Home |       | PgUp |        |      |
  *                                 | Bcksp| Del/ |------|       |------|  Ent   |Space |
- *                                 |      | Symb | End  |       | PgDn |        |      |
+ *                                 |      | Gui  | End  |       | PgDn |        |      |
  *                                 `--------------------'       `----------------------'
  */
 // If it accepts an argument (i.e, is a function), it doesn't need KC_.
 // Otherwise, it needs KC_*
 [BASE] = LAYOUT_ergodox(  // layer 0 : default
         // left hand
-        KC_GRV,        KC_1,         KC_2,   KC_3,   KC_4,          KC_5,   KC_MUTE,
-        KC_TAB,        KC_Q,         KC_W,   KC_E,   KC_R,          KC_T,   ALL_T(KC_LBRC),
-        KC_ESC,        KC_A,         KC_S,   KC_D,   LT(MOVE, KC_F),KC_G,
-        KC_LSPO,       KC_Z,         KC_X,   KC_C,   KC_V,          KC_B,   TG(SYMB),
-        KC_LCTL,       KC_LALT,      KC_LGUI,BL_STEP,MO(MDIA),
-                                                                            TABPREB,      TABNEXT,
-                                                                                          KC_HOME,
-                                                                    KC_BSPC,GUI_T(KC_DEL),KC_END,
+        KC_GRV,        KC_1,          KC_2,   KC_3,   KC_4,          KC_5,   KC_MINS,
+        KC_TAB,        KC_Q,          KC_W,   KC_E,   KC_R,          KC_T,   ALL_T(KC_LBRC),
+        KC_ESC,        LT(MOVE, KC_A),KC_S,   KC_D,   KC_F,          KC_G,
+        KC_LSPO,       KC_Z,          KC_X,   KC_C,   KC_V,          KC_B,   TT(SYMB),
+        KC_LCTL,       KC_LALT,       KC_LGUI,BL_STEP,KC_MUTE,
+                                                                  KC_VOLD,      KC_VOLU,
+                                                                                KC_HOME,
+                                                      KC_BSPC,    GUI_T(KC_DEL),KC_END,
         // right hand
-             KC_6,          KC_7,          KC_8,   KC_9,   KC_0,   KC_MINS,        KC_EQL,
-             MEH_T(KC_RBRC),KC_Y,          KC_U,   KC_I,   KC_O,   KC_P,           KC_BSLS,
-                            KC_H,          KC_J,   KC_K,   KC_L,   KC_SCLN,        KC_QUOT,
-             TG(MDIA),      KC_N,          KC_M,   KC_COMM,KC_DOT, KC_SLSH,        KC_RSPC,
-                                           KC_LEFT,KC_DOWN,KC_UP,  KC_RIGHT,       MO(SYMB),
-             M(TMUX_SUFFIX),M(TMUX_CMD),
-             KC_PGUP,
-             KC_PGDN,       KC_ENT, KC_SPC
+        KC_EQL,        KC_6,     KC_7,   KC_8,   KC_9,   KC_0,             KC_CAPS,
+        MEH_T(KC_RBRC),KC_Y,     KC_U,   KC_I,   KC_O,   KC_P,             KC_BSLS,
+                       KC_H,     KC_J,   KC_K,   KC_L,   LT(MOVE, KC_SCLN),KC_QUOT,
+        TT(MDIA),      KC_N,     KC_M,   KC_COMM,KC_DOT, KC_SLSH,          KC_RSPC,
+                                 KC_LEFT,KC_DOWN,KC_UP,  KC_RIGHT,         MO(SYMB),
+        TABPREV,       TABNEXT,
+        KC_PGUP,
+        KC_PGDN,       KC_ENT, KC_SPC
     ),
 /* Keymap 1: Symbol Layer
  *
@@ -87,7 +89,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *   | EPRM  |      |      |      |      |                                       |   0  |   0  |   .  |   =  |      |
  *   `-----------------------------------'                                       `----------------------------------'
  *                                        ,-------------.       ,-------------.
- *                                        |      | Caps |       |      |      |
+ *                                        |      |      |       |      |      |
  *                                 ,------|------|------|       |------+------+------.
  *                                 |      |      |APScr |       |      |      |      |
  *                                 |      |      |------|       |------|      |      |
@@ -102,7 +104,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        KC_TRNS,KC_HASH,KC_DLR, KC_LCBR,KC_RCBR,KC_GRV,
        KC_TRNS,KC_PERC,KC_CIRC,KC_LBRC,KC_RBRC,KC_TILD,KC_TRNS,
           EPRM,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,
-                                       KC_TRNS,KC_CAPS,
+                                       KC_TRNS,KC_TRNS,
                                                M(OSX_PS_APP),
                                KC_TRNS,KC_TRNS,M(OSX_PS_ALL),
        // right hand
@@ -115,59 +117,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        KC_TRNS,
        KC_TRNS, KC_TRNS, KC_TRNS
 ),
-/* Keymap 3: Media and mouse keys
+/* Keymap 2: Mouse
  *
  * ,--------------------------------------------------.           ,--------------------------------------------------.
- * |        |      |      |      |      |      |      |           |      |      |      |      |      | Vol- |  Vol+  |
+ * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
  * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
  * |        |      |      | MsUp |      |      |      |           |      |      |      |      |      |      |        |
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * |        |      |MsLeft|MsDown|MsRght|      |------|           |------|      |      |      |      |      |        |
+ * |        |      |MsLeft|MsDown|MsRght|      |------|           |------|      | Lclk | Rclk |      |      |        |
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
  * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
- *   |      |      |      | Lclk | Rclk |                                       | Prev |      |      | Next |      |
- *   `----------------------------------'                                       `----------------------------------'
- *                                        ,-------------.       ,-------------.
- *                                        |      |      |       |      |      |
- *                                 ,------|------|------|       |------+------+------.
- *                                 |      |      |BackTg|       |      |      |      |
- *                                 |      |      |------|       |------|      | Pl/Ps|
- *                                 |      |      |      |       |      |      |      |
- *                                 `--------------------'       `--------------------'
- */
-// MEDIA AND MOUSE
-[MDIA] = LAYOUT_ergodox(
-       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-       KC_TRNS, KC_TRNS, KC_TRNS, KC_MS_U, KC_TRNS, KC_TRNS, KC_TRNS,
-       KC_TRNS, KC_TRNS, KC_MS_L, KC_MS_D, KC_MS_R, KC_TRNS,
-       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-       KC_TRNS, KC_TRNS, KC_TRNS, KC_BTN1, KC_BTN2,
-                                           KC_TRNS, KC_TRNS,
-                                                    BL_TOGG,
-                                  KC_TRNS, KC_TRNS, KC_TRNS,
-    // right hand
-       KC_TRNS,  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_VOLU, KC_VOLD,
-       KC_TRNS,  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-                 KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-       KC_TRNS,  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-                          KC_MRWD, KC_TRNS, KC_TRNS, KC_MFFD, KC_TRNS,
-       KC_TRNS, KC_TRNS,
-       KC_TRNS,
-       KC_TRNS, KC_TRNS, KC_MPLY
-),
-/* Keymap 4: Movement
- *
- * ,--------------------------------------------------.           ,--------------------------------------------------.
- * |  RESET |      |      |      |      |      |      |           |      |      |      |      |      |      | RESET  |
- * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
- * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
- * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * |        |      |      |      |      |      |------|           |------| Left | Down |  Up  | Right|      |        |
- * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
- * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
- *   |      |      |POWER | WAKE |SLEEP |                                       |      |      |      |      |      |
+ *   |      |      |      |      |      |                                       |      |      |      |      |      |
  *   `----------------------------------'                                       `----------------------------------'
  *                                        ,-------------.       ,-------------.
  *                                        |      |      |       |      |      |
@@ -177,13 +138,54 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                 |      |      |      |       |      |      |      |
  *                                 `--------------------'       `--------------------'
  */
-// MEDIA AND MOUSE
+// MOUSE
+[MDIA] = LAYOUT_ergodox(
+       KC_TRNS, KC_TRNS, KC_TRNS,     KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS,
+       KC_TRNS, KC_TRNS, KC_TRNS,     KC_MS_U,    KC_TRNS, KC_TRNS, KC_TRNS,
+       KC_TRNS, KC_TRNS, KC_MS_L,     KC_MS_D,    KC_MS_R, KC_TRNS,
+       KC_TRNS, KC_TRNS, KC_TRNS,     KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS,
+       KC_TRNS, KC_TRNS, KC_TRNS,     KC_TRNS,    KC_TRNS,
+                                                           KC_TRNS, KC_TRNS,
+                                                                    KC_TRNS,
+                                                  KC_TRNS, KC_TRNS, KC_TRNS,
+    // right hand
+       KC_TRNS,  KC_TRNS, KC_TRNS,    KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS,
+       KC_TRNS,  KC_TRNS, KC_TRNS,    KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS,
+                 KC_TRNS, KC_BTN1,    KC_BTN2,    KC_TRNS, KC_TRNS, KC_TRNS,
+       KC_TRNS,  KC_TRNS, KC_TRNS,    KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS,
+                          KC_TRNS,    KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS,
+       KC_TRNS, KC_TRNS,
+       KC_TRNS,
+       KC_TRNS, KC_TRNS, KC_TRNS
+),
+/* Keymap 3: Movement
+ *
+ * ,--------------------------------------------------.           ,--------------------------------------------------.
+ * |  RESET |      |      |      |      |      |      |           |      |      |      |      |      |      | RESET  |
+ * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
+ * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
+ * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
+ * |        |      |PrevSC|NextSC|      |      |------|           |------| Left | Down |  Up  | Right|      |        |
+ * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
+ * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
+ * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
+ *   |EJECT |      |POWER | WAKE |SLEEP |                                       |      |      |      |      |      |
+ *   `----------------------------------'                                       `----------------------------------'
+ *                                        ,-------------.       ,-------------.
+ *                                        |      |      |       |      |      |
+ *                                 ,------|------|------|       |------+------+------.
+ *                                 |      |      |      |       |      |      |      |
+ *                                 |      |      |------|       |------|      |      |
+ *                                 |      |      |      |       |      |      |      |
+ *                                 `--------------------'       `--------------------'
+ */
+// MOVEMENT
 [MOVE] = LAYOUT_ergodox(
        RESET,   KC_TRNS,        KC_TRNS,        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
        KC_TRNS, KC_TRNS,        KC_TRNS,        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-       KC_TRNS, KC_TRNS,        KC_TRNS,        KC_TRNS, KC_TRNS, KC_TRNS,
+       KC_TRNS, KC_TRNS,        PREVSC,         NEXTSC,  KC_TRNS, KC_TRNS,
        KC_TRNS, KC_TRNS,        KC_TRNS,        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-       KC_TRNS, KC_TRNS,        KC_WAKE,        KC_SLEP, KC_TRNS, 
+       KC_EJCT, KC_TRNS,        KC_WAKE,        KC_SLEP, KC_TRNS, 
                                              KC_TRNS, KC_TRNS,
                                                       KC_TRNS,
                                     KC_TRNS, KC_TRNS, KC_TRNS,
@@ -215,16 +217,6 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
         case EEPROM:
           if (record->event.pressed) { // For resetting EEPROM
             eeconfig_init();
-          }
-          break;
-        case TMUX_SUFFIX:
-          if (record->event.pressed) {
-            return MACRO(D(LCTRL), T(B), U(LCTL), END);
-          }
-          break;
-        case TMUX_CMD:
-          if (record->event.pressed) {
-            return MACRO(D(LCTRL), T(B), U(LCTL), D(LSFT), T(SCOLON), U(LCTRL), U(LSFT), END);
           }
           break;
         case OSX_PS_ALL:
