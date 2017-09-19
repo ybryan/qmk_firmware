@@ -33,12 +33,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Basic layer
  *
  * ,--------------------------------------------------.           ,--------------------------------------------------.
- * |  -     |   1  |   2  |   3  |   4  |   5  |  ~   |           | CAPs |   6  |   7  |   8  |   9  |   0  |   =    |
+ * |  -     |   1  |   2  |   3  |   4  |   5  |  F3  |           |  F4  |   6  |   7  |   8  |   9  |   0  |   =    |
  * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
  * | TAB    |   Q  |   W  |   E  |   R  |   T  |  [   |           |   ]  |LT3, Y|   U  |   I  |   O  |   P  |   \    |
  * |--------+------+------+------+------+------|Hyper |           | Meh  |------+------+------+------+------+--------|
  * | G/Esc  |   A  |   S  |   D  |LT3, F|   G  |------|           |------|   H  |   J  |   K  |   L  |   ;  | Enter  |
- * |--------+------+------+------+------+------|  L1  |           |  '   |------+------+------+------+------+--------|
+ * |--------+------+------+------+------+------|  ~   |           |  '   |------+------+------+------+------+--------|
  * | LShift |   Z  |   X  |   C  |   V  |   B  |      |           |      |   N  |   M  |   ,  |   .  |   /  | RShift |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
  *   |LCTRL | LAFT |  LED | MUTE | LGUI |                                       | Left | Down |  Up  | Right|  L2  |
@@ -46,25 +46,25 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                        ,-------------.       ,-------------.
  *                                        | VolD | VolU |       | TabP | TabN |
  *                                 ,------|------|------|       |------+--------+------.
- *                                 |      |      |  F4  |       | PgUp |        |      |
- *                                 | Bcksp| Del/ |------|       |------|  Ent   |Space |
- *                                 |      | L1   |  F3  |       | PgDn |        |      |
+ *                                 |      |      | CAPS |       | PgUp |        |      |
+ *                                 | Bcksp| Del  |------|       |------|  Ent   |Space |
+ *                                 |      |      |  L1  |       | PgDn |        |      |
  *                                 `--------------------'       `----------------------'
  */
 // If it accepts an argument (i.e, is a function), it doesn't need KC_.
 // Otherwise, it needs KC_*
 [BASE] = LAYOUT_ergodox(  // layer 0 : default
         // left hand
-        KC_MINS,       KC_1,   KC_2,   KC_3,   KC_4,             KC_5,            KC_GRV,
-        KC_TAB,        KC_Q,   KC_W,   KC_E,   KC_R,             KC_T,            ALL_T(KC_LBRC),
+        KC_MINS,       KC_1,   KC_2,   KC_3,   KC_4,             KC_5,   KC_F3,
+        KC_TAB,        KC_Q,   KC_W,   KC_E,   KC_R,             KC_T,   ALL_T(KC_LBRC),
         KC_GESC,       KC_A,   KC_S,   KC_D,   LT(MOVE, KC_F),   KC_G,
-        KC_LSPO,       KC_Z,   KC_X,   KC_C,   KC_V,             KC_B,            TT(SYMB),
+        KC_LSPO,       KC_Z,   KC_X,   KC_C,   KC_V,             KC_B,   KC_GRV,
         KC_LCTL,       KC_LALT,BL_TOGG,KC_MUTE,KC_LGUI,
-                                                                 KC_VOLD,         KC_VOLU,
-                                                                                  KC_F4,
-                                               KC_BSPC,          LT(SYMB, KC_DEL),KC_F3,
+                                                                 KC_VOLD,KC_VOLU,
+                                                                         KC_CAPS,
+                                               KC_BSPC,          KC_DEL, TT(SYMB),
         // right hand
-        KC_CAPS,       KC_6,          KC_7,   KC_8,   KC_9,  KC_0,        KC_EQL,
+        KC_F4,         KC_6,          KC_7,   KC_8,   KC_9,  KC_0,        KC_EQL,
         MEH_T(KC_RBRC),LT(MOVE, KC_Y),KC_U,   KC_I,   KC_O,  KC_P,        KC_BSLS,
                        KC_H,          KC_J,   KC_K,   KC_L,  KC_SCLN,     KC_ENT,
         KC_QUOT,       KC_N,          KC_M,   KC_COMM,KC_DOT,KC_SLSH,     KC_RSPC,
