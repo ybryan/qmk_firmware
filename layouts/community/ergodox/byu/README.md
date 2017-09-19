@@ -17,15 +17,15 @@
  *                                        | VolD | VolU |       | TabP | TabN |
  *                                 ,------|------|------|       |------+--------+------.
  *                                 |      |      |  F4  |       | PgUp |        |      |
- *                                 | Bcksp| Del  |------|       |------|  Ent   |Space |
- *                                 |      |      |  F3  |       | PgDn |        |      |
+ *                                 | Bcksp| Del/ |------|       |------|  Ent   |Space |
+ *                                 |      | L1   |  F3  |       | PgDn |        |      |
  *                                 `--------------------'       `----------------------'
 ```
 * Press-and-hold `f` to go to the movement layer
 * Press-and-hold `y` to go to the movement layer
 * Press-and-hold `[` to use Hyper modifier (Shift-Control-Alt-Gui)
 * Press-and-hold `]` to use Meh modifier (Shift-Control-Alt)
-* Shift/Gui with `Esc` to output tilde 
+* Shift/Gui with `Esc` to output 3 tick marks  
 
 
 ### Keymap 1: Symbol Layer
