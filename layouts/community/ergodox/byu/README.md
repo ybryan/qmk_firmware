@@ -17,8 +17,8 @@
  *                                        | VolD | VolU |       | TabP | TabN |
  *                                 ,------|------|------|       |------+--------+------.
  *                                 |      |      | CAPS |       | PgUp |        |      |
- *                                 | Bcksp| Del  |------|       |------|  Ent   |Space |
- *                                 |      |      |  L1  |       | PgDn |        |      |
+ *                                 | Bcksp| Del/ |------|       |------|  Ent   |Space |
+ *                                 |      | L1   |  L1  |       | PgDn |        |      |
  *                                 `--------------------'       `----------------------'
 ```
 * Press-and-hold `f` to go to the movement layer
