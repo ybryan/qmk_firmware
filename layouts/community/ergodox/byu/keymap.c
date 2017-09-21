@@ -44,7 +44,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *   |LCTRL | LAFT | TabP | TabN | LGUI |                                       | Left | Down |  Up  | Right|  L2  |
  *   `----------------------------------'                                       `----------------------------------'
  *                                        ,-------------.       ,-------------.
- *                                        | PgDn | PgUp |       | TabP | LED  |
+ *                                        | PgDn | PgUp |       | Mute | LED  |
  *                                 ,------|------|------|       |------+--------+------.
  *                                 |      |      | CAPS |       | VolD |        |      |
  *                                 | Bcksp| Del  |------|       |------|  Ent   |Space |
