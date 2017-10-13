@@ -44,7 +44,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *   |LCTRL | LAFT | TabP | TabN | LGUI |                                       | Left | Down |  Up  | Right|  L2  |
  *   `----------------------------------'                                       `----------------------------------'
  *                                        ,-------------.       ,-------------.
- *                                        | PgDn | PgUp |       | Mute | LED  |
+ *                                        |   [  |   ]  |       | Mute | LED  |
  *                                 ,------|------|------|       |------+--------+------.
  *                                 |      |      | CAPS |       | VolD |        |      |
  *                                 | Bcksp| Del  |------|       |------|  Ent   |Space |
@@ -60,7 +60,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_GESC,       KC_A,   KC_S,   KC_D,   LT(MOVE, KC_F),KC_G,
         KC_LSPO,       KC_Z,   KC_X,   KC_C,   KC_V,          KC_B,   ALL_T(KC_LBRC), 
         KC_LCTL,       KC_LALT,TABPREV,TABNEXT,KC_LGUI,
-                                                              KC_PGDN,KC_PGUP,
+                                                              KC_LBRC,KC_RBRC,
                                                                       KC_CAPS,
                                                KC_BSPC,       KC_DEL, TT(SYMB),
         // right hand
@@ -161,7 +161,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,--------------------------------------------------.           ,--------------------------------------------------.
  * |  RESET | VRSN |EEPROM|      |      |      |      |           |      |      |      |      |      |      | RESET  |
  * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
- * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
+ * |        |      |      |      |      |      |      |           |      |      | PgDn | PgUp |      |      |        |
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
  * |        |      |PrevSC|NextSC|      |      |------|           |------| Left | Down |  Up  | Right|      |        |
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
@@ -189,7 +189,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                     KC_TRNS, KC_TRNS, KC_TRNS,
     // right hand
        KC_TRNS,  KC_TRNS,   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,   RESET,
-       KC_TRNS,  KC_TRNS,   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,   KC_TRNS,
+       KC_TRNS,  KC_TRNS,   KC_PGDN, KC_PGUP, KC_TRNS, KC_TRNS,   KC_TRNS,
                  KC_LEFT,   KC_DOWN, KC_UP,   KC_RIGHT,KC_TRNS,   KC_TRNS,
        KC_TRNS,  KC_TRNS,   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,   KC_TRNS,
                             KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,   KC_TRNS,
