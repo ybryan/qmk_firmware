@@ -61,7 +61,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
  * | LShift |   Z  |   X  |   C  |   V  |   B  |      |           |      |   N  |   M  |   ,  |   .  |   /  | RShift |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
- *   |LCtrl | LAlt |  [   |   ]  |LGUI/`|                                       | Left | Down |  Up  | Right|  L2  |
+ *   |LCtrl |LAlt/`|  [   |   ]  |LGUI/`|                                       | Left | Down |  Up  | Right|  L2  |
  *   `----------------------------------'                                       `----------------------------------'
  *                                      ,--------------.       ,-------------.
  *                                      | PgDn  | PgUp |       | Mute | Meh  |
@@ -75,11 +75,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // Otherwise, it needs KC_*
 [BASE] = LAYOUT_ergodox(  // layer 0 : default
         // left hand
-        KC_EQL,        KC_1,   KC_2,   TD(TD_3_LBRC),TD(TD_4_LCBR), KC_5,   KC_TRNS,
-        KC_TAB,        KC_Q,   KC_W,   KC_E,         KC_R,          KC_T,   KC_TRNS,
-        ALL_T(KC_ESC), KC_A,   KC_S,   KC_D,         LT(MOVE, KC_F),KC_G,
-        KC_LSPO,       KC_Z,   KC_X,   KC_C,         KC_V,          KC_B,   KC_TRNS, 
-        KC_LCTL,       KC_LALT,KC_LBRC,KC_RBRC,      GUI_T(KC_GRV),
+        KC_EQL,        KC_1,         KC_2,   TD(TD_3_LBRC),TD(TD_4_LCBR), KC_5,   KC_TRNS,
+        KC_TAB,        KC_Q,         KC_W,   KC_E,         KC_R,          KC_T,   KC_TRNS,
+        ALL_T(KC_ESC), KC_A,         KC_S,   KC_D,         LT(MOVE, KC_F),KC_G,
+        KC_LSPO,       KC_Z,         KC_X,   KC_C,         KC_V,          KC_B,   KC_TRNS, 
+        KC_LCTL,       ALT_T(KC_GRV),KC_LBRC,KC_RBRC,      GUI_T(KC_GRV),
                                                               KC_PGDN,KC_PGUP,
                                                                       KC_CAPS,
                                                KC_BSPC,       KC_DEL, TT(SYMB),
