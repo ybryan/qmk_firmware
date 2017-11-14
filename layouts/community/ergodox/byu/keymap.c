@@ -4,7 +4,7 @@
 #include "version.h"
 
 #define BASE 0 // default layer
-#define SYMB 1 // symbols
+#define FUNC 1 // functions
 #define MOUS 2 // mouse keys
 #define MOVE 3 // movement layer
   
@@ -59,7 +59,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,        KC_Q,         KC_W,   KC_E,         KC_R,          KC_T,   KC_TRNS,
         GUI_T(KC_ESC), KC_A,         KC_S,   KC_D,         LT(MOVE, KC_F),KC_G,
         KC_LSPO,       KC_Z,         KC_X,   KC_C,         KC_V,          KC_B,   KC_TRNS, 
-        KC_LCTL,       ALT_T(KC_GRV),KC_LBRC,KC_RBRC,      TT(SYMB),
+        KC_LCTL,       ALT_T(KC_GRV),KC_LBRC,KC_RBRC,      TT(FUNC),
                                                               KC_LGUI,KC_GRV,
                                                                       KC_CAPS,
                                                KC_BSPC,       KC_DEL, KC_HYPR,
@@ -73,7 +73,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_MUTE,
         KC_MEH,        KC_ENT, KC_SPC
     ),
-/* Keymap 1: Symbol Layer
+/* Keymap 1: Function Layer
  *
  * ,---------------------------------------------------.           ,--------------------------------------------------.
  * |         |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
@@ -82,7 +82,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
  * |         |   1  |   2  |   3  |   4  |   5  |------|           |------|   6  |   7  |   8  |   9  |   0  |        |
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * |         |      |      |      |      |      |      |           |      |  F11 | F12  |      |      |      |        |
+ * |         |  F11 | F12  |      |      |      |      |           |      |   `  |  [   |   ]  |      |      |        |
  * `---------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
  *   |       |      |      |      |      |                                       |      |      |      |      |      |
  *   `-----------------------------------'                                       `----------------------------------'
@@ -94,13 +94,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                 |      |      |      |       |      |      |      |
  *                                 `--------------------'       `--------------------'
  */
-// SYMBOLS
-[SYMB] = LAYOUT_ergodox(
+// FUNCTION 
+[FUNC] = LAYOUT_ergodox(
        // left hand
        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
        KC_TRNS, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,    KC_TRNS,
        KC_TRNS, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,   
-       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+       KC_TRNS, KC_F11,  KC_F12,  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
                                        KC_TRNS,KC_TRNS,
                                                KC_TRNS,
@@ -109,12 +109,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
        KC_TRNS, KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_TRNS,
                 KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_TRNS,
-       KC_TRNS, KC_F11,  KC_F12,  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+       KC_TRNS, KC_GRV,  KC_LBRC, KC_RBRC, KC_TRNS, KC_TRNS, KC_TRNS,
                          KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
        KC_TRNS,      KC_TRNS,
        KC_TRNS,       
        KC_TRNS,      KC_TRNS, KC_TRNS
 ),
+
 /* Keymap 2: Mouse
  *
  * ,--------------------------------------------------.           ,--------------------------------------------------.
@@ -156,6 +157,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        KC_TRNS,
        KC_TRNS, KC_TRNS, KC_TRNS
 ),
+
 /* Keymap 3: Movement
  *
  * ,--------------------------------------------------.           ,--------------------------------------------------.
@@ -200,7 +202,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 const uint16_t PROGMEM fn_actions[] = {
-    [1] = ACTION_LAYER_TAP_TOGGLE(SYMB)                // FN1 - Momentary Layer 1 (Symbols)
+    [1] = ACTION_LAYER_TAP_TOGGLE(FUNC)                // FN1 - Momentary Layer 1 (Functions)
 };
 
 const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
