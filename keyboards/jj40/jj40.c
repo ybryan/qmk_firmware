@@ -1,5 +1,6 @@
 /*
 Copyright 2017 Luiz Ribeiro <luizribeiro@gmail.com>
+Modified 2018 Kenneth A. <github.com/krusli>
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -16,30 +17,40 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include "jj40.h"
+
+#ifdef RGBLIGHT_ENABLE
+
+#include <string.h>
+#include "i2c_master.h"
 #include "rgblight.h"
-
-#include <avr/pgmspace.h>
-
-#include "action_layer.h"
-#include "i2c.h"
-#include "quantum.h"
 
 extern rgblight_config_t rgblight_config;
 
+void matrix_init_kb(void) {
+  i2c_init();
+  // call user level keymaps, if any
+  matrix_init_user();
+}
+// custom RGB driver
 void rgblight_set(void) {
-    if (!rgblight_config.enable) {
-        for (uint8_t i = 0; i < RGBLED_NUM; i++) {
-            led[i].r = 0;
-            led[i].g = 0;
-            led[i].b = 0;
-        }
-    }
+  if (!rgblight_config.enable) {
+    memset(led, 0, 3 * RGBLED_NUM);
+  }
 
-    i2c_init();
-    i2c_send(0xb0, (uint8_t*)led, 3 * RGBLED_NUM);
+  i2c_transmit(0xb0, (uint8_t*)led, 3 * RGBLED_NUM, 100);
 }
 
-__attribute__ ((weak))
-void matrix_scan_user(void) {
-    rgblight_task();
+bool rgb_init = false;
+
+void matrix_scan_kb(void) {
+  // if LEDs were previously on before poweroff, turn them back on
+  if (rgb_init == false && rgblight_config.enable) {
+    i2c_transmit(0xb0, (uint8_t*)led, 3 * RGBLED_NUM, 100);
+    rgb_init = true;
+  }
+
+  rgblight_task();
+  matrix_scan_user();
 }
+
+#endif
